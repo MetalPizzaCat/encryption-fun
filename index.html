@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<head>
+    <title> Encryption is fun !</title>
+    <script>
+        function encryptCaesar() {
+            let alphabet = document.getElementById("alphabet").value;
+            let source = document.getElementById("ceaserInput").value;
+            let offset = parseInt(document.getElementById("keyInput").value);
+            let lowerCaseAlphabet = alphabet.toLowerCase();
+            let alphabetSize = alphabet.length;
+            let result = "";
+            for (let i = 0; i < source.length; i++) {
+                if (source.charAt(i) === source.charAt(i).toUpperCase()) {
+                    let id = alphabet.indexOf(source.charAt(i));
+                    result += alphabet.charAt((id + offset) % alphabetSize);
+                }
+                else if (source.charAt(i) === source.charAt(i).toLowerCase()) {
+                    let id = lowerCaseAlphabet.indexOf(source.charAt(i))
+                    result += lowerCaseAlphabet.charAt((id + offset) % alphabetSize);
+                }
+                else {
+                    result += source.charAt(i);
+                }
+            }
+            document.getElementById("ceaserOutput").textContent = result;
+        }
+
+        function decryptCaesar() {
+            let alphabet = document.getElementById("alphabet").value;
+            let source = document.getElementById("ceaserInputDecrypt").value;
+            let offset = parseInt(document.getElementById("keyInputDecrypt").value);
+            let lowerCaseAlphabet = alphabet.toLowerCase();
+            let alphabetSize = alphabet.length;
+            let result = "";
+            for (let i = 0; i < source.length; i++) {
+                if (source.charAt(i) === source.charAt(i).toUpperCase()) {
+                    let id = alphabet.indexOf(source.charAt(i));
+                    result += alphabet.charAt((id - offset) % alphabetSize);
+                }
+                else if (source.charAt(i) === source.charAt(i).toLowerCase()) {
+                    let id = lowerCaseAlphabet.indexOf(source.charAt(i))
+                    result += lowerCaseAlphabet.charAt((id - offset) % alphabetSize);
+                }
+                else {
+                    result += source.charAt(i);
+                }
+            }
+            document.getElementById("ceaserOutputDecrypt").textContent = result;
+        }
+    </script>
+    <style>
+        .fields {
+            display: flex;
+            
+        }
+        .dingus{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>
+            Шифр цезаря
+        </h1>
+        <h2>Что такое</h2>
+        <p>
+            Шифр Цезаря — это вид шифра подстановки, в котором каждый символ в открытом тексте заменяется символом,
+            находящимся на некотором постоянном числе позиций левее или правее него в алфавите. Например, в шифре со
+            сдвигом вправо на 3, А была бы заменена на Г, Б станет Д, и так далее.
+        </p>
+        <h2>Как пользоваться</h2>
+        <p>
+        <ul>
+            <li>Введите текст</li>
+            <li>Введите ключ</li>
+            <li>Нажмите кнопку &quot;Зашифровать&quot; </li>
+        </ul>
+        </p>
+        <div>
+            <h3>Как менять алфавит?</h3>
+            <p>Если необходимо использовать иной алфавит то впишите в поле &quot;Алфавит&quot; требуемую
+                последовательность
+                букв заглавными буквами</p>
+            <p>Алфавит</p>
+            <input id="alphabet" value="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ">
+        </div>
+        <div class="fields">
+            <div >
+                <h4>Зашифровать</h4>
+                <p>Входные данные</p>
+                <input id="ceaserInput" value="Пончик">
+                <p>Сдвиг</p>
+                <input type="number" id="keyInput" value="3">
+                <p>Результат: </p>
+                <p id="ceaserOutput"></p>
+                <button onclick="encryptCaesar()">Зашифровать</button>
+            </div>
+            <div class="dingus">
+                <h4>Дешифровать</h4>
+                <p>Входные данные</p>
+                <input id="ceaserInputDecrypt" value="Тсрълн">
+                <p>Сдвиг</p>
+                <input type="number" id="keyInputDecrypt" value="3">
+                <p>Результат: </p>
+                <p id="ceaserOutputDecrypt"></p>
+                <button onclick="decryptCaesar()">Дешифровать</button>
+            </div>
+        </div>
+    </div>
+</body>
